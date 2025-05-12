@@ -9,7 +9,7 @@ password = "securepass123"  # password coming from server
 # Set up SSL context to trust the self-signed cert
 context = ssl.create_default_context()
 context.check_hostname = False
-context.verify_mode = ssl.CERT_NONE  # ⚠️ Dev mode: no cert validation
+context.verify_mode = ssl.CERT_NONE  
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 secure_socket = context.wrap_socket(client_socket)
