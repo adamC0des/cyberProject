@@ -2,9 +2,9 @@ import socket
 import ssl
 import threading
 
-host = '172.184.138.111'  # Your Azure VM's public IP
+host = '172.184.138.111'  # azure pub IP
 port = 12345
-password = "securepass123"  # Must match the server
+password = "securepass123"  # password coming from server
 
 # Set up SSL context to trust the self-signed cert
 context = ssl.create_default_context()
@@ -17,7 +17,7 @@ secure_socket = context.wrap_socket(client_socket)
 secure_socket.connect((host, port))
 print(f"[+] Connected securely to {host}:{port}")
 
-# Handle authentication prompt
+# auth prompt
 prompt = secure_socket.recv(1024).decode()
 print(prompt, end='')  # Print 'Password: ' from server
 secure_socket.sendall((password + "\n").encode())
