@@ -2,8 +2,8 @@ import socket
 import ssl
 import threading
 
-# Authentication settings
-AUTH_PASSWORD = "securepass123"  # 🔒 Set your secret password
+
+AUTH_PASSWORD = "securepass123"  
 
 host = '0.0.0.0'
 port = 12345
@@ -14,7 +14,7 @@ server_socket.bind((host, port))
 server_socket.listen(1)
 print(f"[+] Listening securely on port {port}...")
 
-# Wrap socket in TLS
+# wrapping socket in TLS
 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
 context.load_cert_chain(certfile="ssl/cert.pem", keyfile="ssl/key.pem")
 secure_socket = context.wrap_socket(server_socket, server_side=True)
@@ -22,7 +22,7 @@ secure_socket = context.wrap_socket(server_socket, server_side=True)
 client_socket, addr = secure_socket.accept()
 print(f"[+] Client connected from {addr}")
 
-# Authenticate
+# Authenticatication
 client_socket.sendall("Password: ".encode())
 password = client_socket.recv(1024).decode().strip()
 
@@ -35,7 +35,7 @@ if password != AUTH_PASSWORD:
 client_socket.sendall("Authentication successful. Welcome!\n".encode())
 print("[+] Client authenticated successfully.")
 
-# Receive messages
+# recieving
 def receive():
     while True:
         try:
@@ -47,7 +47,7 @@ def receive():
             client_socket.close()
             break
 
-# Send messages
+# outward
 def send():
     while True:
         try:
