@@ -16,7 +16,7 @@ try:
     secure_socket.settimeout(5)
     secure_socket.connect((host, port))
 
-    # If connection succeeds (unexpectedly), read server response
+    # If connection succeeds, read server response
     response = secure_socket.recv(1024).decode()
     print(f"[!] Unexpected access: server responded with: {response}")
 
